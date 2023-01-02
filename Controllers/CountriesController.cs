@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SoccerPlayerAPI.Models;
-using SoccerPlayerAPI.Services;
+using System.Data;
 
 namespace SoccerPlayerAPI.Controllers
 {
@@ -36,6 +35,7 @@ namespace SoccerPlayerAPI.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
 		public async Task<ActionResult<List<Country>>> AddCountry(Country country)
 		{
 			var result = await _countryService.AddCountry(country);
@@ -43,6 +43,7 @@ namespace SoccerPlayerAPI.Controllers
 		}
 
 		[HttpPut("{id}")]
+		[Authorize(Roles = "Admin")]
 		public async Task<ActionResult<List<Country>>> UpdateCountry(int id, Country request)
 		{
 			var result = await _countryService.UpdateCountry(id, request);
@@ -54,6 +55,7 @@ namespace SoccerPlayerAPI.Controllers
 		}
 
 		[HttpDelete("{id}")]
+		[Authorize(Roles = "Admin")]
 		public async Task<ActionResult<List<Country>>> DeleteCountry(int id)
 		{
 			var result = await _countryService.DeleteCountry(id);

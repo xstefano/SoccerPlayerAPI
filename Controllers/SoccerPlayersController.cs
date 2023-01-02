@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SoccerPlayerAPI.Models;
-using SoccerPlayerAPI.Services;
 
 namespace SoccerPlayerAPI.Controllers
 {
@@ -36,6 +35,7 @@ namespace SoccerPlayerAPI.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "Admin")]
 		public async Task<ActionResult<List<SoccerPlayer>>> AddSoccerPlayer(SoccerPlayer soccerPlayer)
 		{
 			var result = await _soccerPlayerService.AddSoccerPlayer(soccerPlayer);
@@ -43,6 +43,7 @@ namespace SoccerPlayerAPI.Controllers
 		}
 
 		[HttpPut("{id}")]
+		[Authorize(Roles = "Admin")]
 		public async Task<ActionResult<List<SoccerPlayer>>> UpdateSoccerPlayer(int id, SoccerPlayer request)
 		{
 			var result = await _soccerPlayerService.UpdateSoccerPlayer(id, request);
@@ -54,6 +55,7 @@ namespace SoccerPlayerAPI.Controllers
 		}
 
 		[HttpDelete("{id}")]
+		[Authorize(Roles = "Admin")]	
 		public async Task<ActionResult<List<SoccerPlayer>>> DeleteSoccerPlayer(int id)
 		{
 			var result = await _soccerPlayerService.DeleteSoccerPlayer(id);
